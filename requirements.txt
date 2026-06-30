@@ -1,0 +1,26 @@
+fastapi==0.115.0
+uvicorn[standard]==0.32.0
+python-multipart==0.0.12
+pydantic==2.9.2
+pydantic-settings==2.6.0
+
+# Parsing
+pdfplumber==0.11.4
+python-docx==1.1.2
+
+# NLP
+spacy==3.8.2
+sentence-transformers==3.2.1
+scikit-learn==1.5.2
+
+# DB
+sqlalchemy==2.0.36
+asyncpg==0.30.0
+alembic==1.13.3
+
+# Auth
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+
+# Utils
+python-dateutil==2.9.0
