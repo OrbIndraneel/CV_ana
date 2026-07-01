@@ -83,33 +83,33 @@ export const ResumeUploader: React.FC<ResumeUploaderProps> = ({
   };
 
   return (
-    <div className="bg-white/90 backdrop-blur-xl rounded-3xl ring-1 ring-gray-200/80 shadow-2xl p-6 max-w-lg w-full animate-slide-up relative">
+    <div className="skeuo-panel p-8 max-w-lg w-full animate-slide-up relative">
       {onClose && (
         <button 
           onClick={onClose}
-          className="absolute top-4 right-4 p-1.5 rounded-full text-slate-400 hover:text-slate-600 hover:bg-slate-100/50 transition-all cursor-pointer"
+          className="absolute top-6 right-6 p-2 rounded-full text-slate-500 hover:text-slate-700 transition-all cursor-pointer skeuo-raised active:skeuo-pressed"
         >
           <X className="h-4.5 w-4.5" />
         </button>
       )}
 
-      <div className="mb-5">
-        <h2 className="text-xl font-bold font-display text-slate-800">Upload Candidate Resume</h2>
-        <p className="text-xs text-slate-505 mt-1">
+      <div className="mb-6">
+        <h2 className="text-xl font-bold font-display text-slate-900">Upload Candidate Resume</h2>
+        <p className="text-xs text-slate-600 mt-1.5 font-medium pr-8">
           Select or drag a document to begin structural extraction and AI NLP evaluations.
         </p>
       </div>
 
       {success ? (
-        <div className="py-12 flex flex-col items-center justify-center text-center animate-fade-in">
-          <div className="h-14 w-14 rounded-full bg-emerald-50 text-emerald-500 flex items-center justify-center shadow-inner mb-4">
+        <div className="py-12 flex flex-col items-center justify-center text-center animate-fade-in skeuo-pressed rounded-[24px]">
+          <div className="h-16 w-16 rounded-full skeuo-raised text-emerald-600 flex items-center justify-center mb-5">
             <CheckCircle className="h-8 w-8" />
           </div>
-          <h3 className="font-bold text-slate-800 text-base">Upload Succeeded!</h3>
-          <p className="text-xs text-slate-500 mt-1">Starting async segment parsing worker...</p>
+          <h3 className="font-bold text-slate-900 text-base">Upload Succeeded!</h3>
+          <p className="text-xs text-slate-600 mt-1.5 font-bold">Starting async segment parsing worker...</p>
         </div>
       ) : (
-        <form onSubmit={handleUploadSubmit} className="space-y-5">
+        <form onSubmit={handleUploadSubmit} className="space-y-6">
           {/* Drag and drop zone */}
           <div
             onDragEnter={handleDrag}
@@ -117,12 +117,10 @@ export const ResumeUploader: React.FC<ResumeUploaderProps> = ({
             onDragLeave={handleDrag}
             onDrop={handleDrop}
             onClick={triggerFileInput}
-            className={`border-2 border-dashed rounded-2xl p-8 flex flex-col items-center justify-center text-center cursor-pointer transition-all duration-200 min-h-48 ${
-              dragActive 
-                ? 'border-indigo-650 bg-indigo-50/20' 
-                : file 
-                ? 'border-emerald-500/50 bg-emerald-50/5' 
-                : 'border-slate-300 hover:border-indigo-650 hover:bg-slate-50/50'
+            className={`rounded-[32px] p-10 flex flex-col items-center justify-center text-center cursor-pointer transition-all duration-300 min-h-48 ${
+              file || dragActive 
+                ? 'skeuo-pressed' 
+                : 'skeuo-raised hover:skeuo-pressed'
             }`}
           >
             <input
@@ -134,15 +132,15 @@ export const ResumeUploader: React.FC<ResumeUploaderProps> = ({
             />
             
             {file ? (
-              <div className="space-y-3">
-                <div className="h-12 w-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto shadow-sm">
-                  <FileText className="h-6 w-6" />
+              <div className="space-y-4">
+                <div className="h-14 w-14 rounded-2xl skeuo-raised text-emerald-600 flex items-center justify-center mx-auto">
+                  <FileText className="h-7 w-7" />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-slate-800 truncate max-w-xs mx-auto">
+                  <p className="text-sm font-bold text-slate-900 truncate max-w-xs mx-auto">
                     {file.name}
                   </p>
-                  <p className="text-xs text-slate-400 mt-0.5 font-medium">
+                  <p className="text-xs text-slate-600 mt-1 font-bold">
                     {(file.size / 1024 / 1024).toFixed(2)} MB • Ready
                   </p>
                 </div>
@@ -152,21 +150,21 @@ export const ResumeUploader: React.FC<ResumeUploaderProps> = ({
                     e.stopPropagation();
                     setFile(null);
                   }}
-                  className="text-xs font-bold text-rose-500 hover:text-rose-600 hover:underline inline-flex items-center gap-1 mt-1 cursor-pointer"
+                  className="text-xs font-bold text-rose-500 hover:text-rose-600 hover:underline inline-flex items-center gap-1 mt-2 cursor-pointer"
                 >
                   Remove file
                 </button>
               </div>
             ) : (
-              <div className="space-y-3">
-                <div className="h-12 w-12 rounded-xl bg-slate-50 text-slate-400 flex items-center justify-center mx-auto shadow-inner">
-                  <Upload className="h-6 w-6" />
+              <div className="space-y-4">
+                <div className="h-14 w-14 rounded-2xl skeuo-pressed text-slate-500 flex items-center justify-center mx-auto">
+                  <Upload className="h-7 w-7" />
                 </div>
                 <div>
-                  <p className="text-xs font-bold text-slate-700">
-                    Drag and drop file here, or <span className="text-indigo-650 hover:underline">browse</span>
+                  <p className="text-xs font-bold text-slate-800">
+                    Drag and drop file here, or <span className="text-indigo-600 hover:underline">browse</span>
                   </p>
-                  <p className="text-[10px] text-slate-400 mt-1 font-semibold">
+                  <p className="text-[10px] text-slate-500 mt-1.5 font-bold">
                     Supports PDF, DOCX (Max 10MB)
                   </p>
                 </div>
@@ -177,13 +175,13 @@ export const ResumeUploader: React.FC<ResumeUploaderProps> = ({
           {/* Optional parent version linking */}
           {!initialParentId && resumes.length > 0 && (
             <div>
-              <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">
+              <label className="block text-[10px] font-bold text-slate-600 uppercase tracking-widest mb-3 pl-2">
                 Upload as revision of existing resume (Optional)
               </label>
               <select
                 value={parentResumeId}
                 onChange={(e) => setParentResumeId(e.target.value)}
-                className="w-full h-11 px-4 bg-slate-50 border border-slate-200 rounded-full text-xs text-slate-750 focus:outline-none focus:bg-white focus:border-gray-400 focus:ring-2 focus:ring-slate-100 transition-all"
+                className="w-full h-12 px-5 skeuo-pressed rounded-full text-xs text-slate-900 focus:outline-none font-bold transition-all"
               >
                 <option value="">-- Upload as new candidate entry --</option>
                 {resumes
@@ -198,21 +196,21 @@ export const ResumeUploader: React.FC<ResumeUploaderProps> = ({
           )}
 
           {error && (
-            <div className="bg-rose-500/10 border border-rose-500/20 rounded-2xl p-4 flex gap-3 text-xs text-rose-500 animate-slide-up">
+            <div className="skeuo-pressed border-l-4 border-rose-500 rounded-2xl p-5 flex gap-3 text-xs text-rose-600 animate-slide-up">
               <AlertCircle className="h-4.5 w-4.5 flex-shrink-0 mt-0.5" />
               <div>
-                <p className="font-semibold">Upload failed</p>
-                <p className="mt-0.5">{error}</p>
+                <p className="font-bold">Upload failed</p>
+                <p className="mt-1 font-medium">{error}</p>
               </div>
             </div>
           )}
 
-          <div className="flex gap-3 pt-2">
+          <div className="flex gap-4 pt-4">
             {onClose && (
               <button
                 type="button"
                 onClick={onClose}
-                className="flex-1 h-11 border border-slate-200 hover:bg-slate-100/60 text-slate-600 text-xs font-bold rounded-full transition-all cursor-pointer"
+                className="flex-1 h-12 skeuo-raised text-slate-700 text-xs font-bold rounded-full transition-all cursor-pointer active:skeuo-pressed"
               >
                 Cancel
               </button>
@@ -220,7 +218,11 @@ export const ResumeUploader: React.FC<ResumeUploaderProps> = ({
             <button
               type="submit"
               disabled={!file || loading}
-              className="flex-1 h-11 bg-gray-900 hover:bg-indigo-650 disabled:bg-slate-200 disabled:text-slate-405 active:bg-gray-955 text-white text-xs font-bold rounded-full shadow-sm hover:shadow-md transition-all cursor-pointer flex items-center justify-center gap-2"
+              className={`flex-1 h-12 text-white text-xs font-bold rounded-full transition-all flex items-center justify-center gap-2 ${
+                !file || loading 
+                  ? 'bg-[#2f2016] opacity-50 cursor-not-allowed' 
+                  : 'skeuo-raised-accent cursor-pointer active:skeuo-pressed'
+              }`}
             >
               {loading ? (
                 <>

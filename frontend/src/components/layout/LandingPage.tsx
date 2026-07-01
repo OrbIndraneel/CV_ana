@@ -171,8 +171,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
       <div className="relative z-10 text-center px-6 max-w-4xl mx-auto flex flex-col items-center">
         {/* Headline */}
         <h1 className="text-gray-900 font-normal leading-[1.05] tracking-tight text-[40px] min-[400px]:text-[44px] sm:text-6xl lg:text-7xl xl:text-[80px]">
-          <span className="block animate-fade-up">Pass the ATS.</span>
-          <span className="block animate-fade-up [animation-delay:100ms] font-semibold bg-gradient-to-r from-gray-900 to-indigo-650 bg-clip-text text-transparent">Effortlessly.</span>
+          <span className="block animate-fade-up">Screen candidates.</span>
+          <span className="block animate-fade-up [animation-delay:100ms] font-semibold bg-gradient-to-r from-gray-900 to-indigo-650 bg-clip-text text-transparent">With AI precision.</span>
         </h1>
 
         {/* Search Bar Form */}
@@ -185,7 +185,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
             <input 
               type="text" 
               required
-              placeholder="Paste job description to check compatibility..."
+              placeholder="Paste a job description to discover top matching resumes..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="flex-1 bg-transparent text-sm sm:text-base text-gray-900 placeholder-gray-500 outline-none py-2"
@@ -202,8 +202,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
 
         {/* Description */}
         <p className="animate-fade-up [animation-delay:340ms] mt-4 sm:mt-5 text-gray-600 text-sm sm:text-base lg:text-lg leading-relaxed max-w-md">
-          Ship resumes that pass applicant tracking systems <br />
-          &mdash; and get seen by <Sparkles className="inline w-4 h-4 -mt-1 text-yellow-500 fill-yellow-500" /> top recruiters
+          Automate resume screening, extract core skills, <br />
+          and rank talent instantly with <Sparkles className="inline w-4 h-4 -mt-1 text-yellow-500 fill-yellow-500" /> advanced NLP.
         </p>
 
         {/* CTA Actions */}
@@ -212,13 +212,13 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
             onClick={onGetStarted}
             className="bg-gray-900 hover:bg-indigo-600 text-white text-sm font-semibold px-6 py-3 rounded-full hover:shadow-lg transition-all active:scale-98 cursor-pointer"
           >
-            Scan Resume Free
+            Start Sourcing Free
           </button>
           <button 
             onClick={onGetStarted}
             className="text-gray-700 text-sm font-semibold px-6 py-3 rounded-full ring-1 ring-gray-300 hover:bg-gray-150 transition-colors active:scale-98 bg-white/40 backdrop-blur-sm cursor-pointer"
           >
-            Try Premium Check
+            View Demo
           </button>
         </div>
       </div>
@@ -334,10 +334,10 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
                 {/* Profile Widget */}
                 <div className="border-t border-white/5 pt-3 flex items-center gap-2 px-1 text-white/50">
                   <div className="w-5 h-5 rounded-full bg-[#3b82f6] text-[8px] font-bold text-white flex items-center justify-center">
-                    CD
+                    RO
                   </div>
                   <div className="min-w-0">
-                    <p className="text-[9px] text-white/70 leading-none font-semibold truncate">Candidate</p>
+                    <p className="text-[9px] text-white/70 leading-none font-semibold truncate">Recruitment Officer</p>
                     <span className="text-[7px] text-white/40 leading-none">Free Tier</span>
                   </div>
                 </div>

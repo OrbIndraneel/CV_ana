@@ -8,7 +8,6 @@ import {
   Zap, 
   Shield, 
   CreditCard,
-  ExternalLink,
   ChevronRight
 } from 'lucide-react';
 
@@ -72,7 +71,7 @@ export const PricingPage: React.FC = () => {
       monthlyPrice: 0,
       annualPrice: 0,
       icon: HelpCircle,
-      iconColor: 'text-slate-400 bg-slate-900',
+      iconColor: 'text-slate-600',
       features: [
         'Resume upload and basic text parsing',
         'Basic ATS compatibility checks',
@@ -89,7 +88,7 @@ export const PricingPage: React.FC = () => {
       monthlyPrice: 4.99,
       annualPrice: 39,
       icon: Zap,
-      iconColor: 'text-indigo-400 bg-indigo-500/10',
+      iconColor: 'text-indigo-500',
       features: [
         'Semantic Job Fit Scoring (concept match)',
         'Bullet Quality analysis & suggestions',
@@ -106,7 +105,7 @@ export const PricingPage: React.FC = () => {
       monthlyPrice: 14.99,
       annualPrice: 119,
       icon: Sparkles,
-      iconColor: 'text-purple-400 bg-purple-500/10',
+      iconColor: 'text-purple-500',
       features: [
         'Everything in Professional tier',
         'AI Bullet Rewriter (10 rewrites/mo)',
@@ -125,7 +124,7 @@ export const PricingPage: React.FC = () => {
       monthlyPrice: 49.99,
       annualPrice: 399,
       icon: Shield,
-      iconColor: 'text-emerald-400 bg-emerald-500/10',
+      iconColor: 'text-emerald-500',
       features: [
         'Everything in Pro Plus tier',
         'Bulk uploads (10-50 resumes simultaneously)',
@@ -141,36 +140,36 @@ export const PricingPage: React.FC = () => {
   return (
     <div className="space-y-8 max-w-6xl mx-auto py-4">
       {/* Title */}
-      <div className="text-center space-y-4 max-w-xl mx-auto">
-        <h2 className="text-2xl font-bold font-display text-slate-800">
+      <div className="text-center space-y-4 max-w-xl mx-auto skeuo-panel p-8">
+        <h2 className="text-2xl font-bold font-display text-slate-900">
           Flexible Pricing Tiers
         </h2>
-        <p className="text-xs text-slate-505 font-medium">
+        <p className="text-xs text-slate-600 font-medium">
           Get recruiter-grade feedback on your CV and optimize your application pipeline.
         </p>
 
         {/* Annual discount toggle */}
-        <div className="inline-flex items-center gap-3 p-1 background bg-slate-100/80 border border-slate-200/60 rounded-full">
+        <div className="inline-flex items-center gap-2 p-1.5 skeuo-pressed rounded-full mt-4">
           <button
             onClick={() => setBillingPeriod('monthly')}
-            className={`px-4.5 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${
+            className={`px-5 py-2.5 rounded-full text-xs font-bold transition-all cursor-pointer ${
               billingPeriod === 'monthly'
-                ? 'bg-white text-slate-900 shadow-sm'
-                : 'text-slate-500 hover:text-slate-800'
+                ? 'skeuo-raised text-slate-900'
+                : 'text-slate-600 hover:text-slate-800'
             }`}
           >
             Monthly
           </button>
           <button
             onClick={() => setBillingPeriod('annual')}
-            className={`px-4.5 py-2 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+            className={`px-5 py-2.5 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
               billingPeriod === 'annual'
-                ? 'bg-white text-slate-900 shadow-sm'
-                : 'text-slate-500 hover:text-slate-800'
+                ? 'skeuo-raised text-slate-900'
+                : 'text-slate-600 hover:text-slate-800'
             }`}
           >
             Annual
-            <span className="bg-emerald-500/10 text-emerald-600 text-[10px] px-2 py-0.5 rounded-full font-bold">
+            <span className="skeuo-pressed text-emerald-600 text-[10px] px-2.5 py-1 rounded-full font-bold ml-1">
               Save up to 34%
             </span>
           </button>
@@ -178,13 +177,13 @@ export const PricingPage: React.FC = () => {
       </div>
 
       {error && (
-        <div className="max-w-md mx-auto bg-rose-500/10 border border-rose-500/20 text-rose-600 rounded-2xl p-4 text-xs font-bold text-center">
+        <div className="max-w-md mx-auto bg-rose-50 border border-rose-200 text-rose-600 rounded-2xl p-4 text-xs font-bold text-center skeuo-pressed">
           {error}
         </div>
       )}
 
       {/* Grid of pricing cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-stretch pt-4">
         {pricingTiers.map((tier) => {
           const Icon = tier.icon;
           const isCurrentTier = userTier === tier.id;
@@ -197,65 +196,67 @@ export const PricingPage: React.FC = () => {
           return (
             <div 
               key={tier.id}
-              className={`bg-white/60 backdrop-blur-md rounded-3xl p-6 flex flex-col justify-between relative shadow-sm hover:shadow-md transition-all group ${
+              className={`rounded-[32px] p-7 flex flex-col justify-between relative transition-all duration-300 ${
                 tier.popular 
-                  ? 'ring-2 ring-indigo-650/85 border-indigo-650/40' 
-                  : 'ring-1 ring-gray-200/80 border-transparent'
+                  ? 'skeuo-raised border-2 border-indigo-200/50' 
+                  : 'skeuo-raised'
               }`}
             >
               {tier.popular && (
-                <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-[9px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                <span className="absolute -top-4 left-1/2 -translate-x-1/2 skeuo-raised-accent text-white text-[10px] font-bold px-4 py-1.5 rounded-full uppercase tracking-wider">
                   Most Popular
                 </span>
               )}
 
               <div className="space-y-6">
                 {/* Header info */}
-                <div className="space-y-3">
+                <div className="space-y-4">
                   <div className="flex justify-between items-center">
-                    <div className={`h-9 w-9 rounded-xl flex items-center justify-center ${tier.iconColor}`}>
-                      <Icon className="h-5 w-5" />
+                    <div className={`h-12 w-12 rounded-2xl skeuo-pressed flex items-center justify-center ${tier.iconColor}`}>
+                      <Icon className="h-6 w-6" />
                     </div>
                     {isActive && (
-                      <span className="bg-emerald-50 text-emerald-600 text-[10px] font-bold px-2 py-0.5 rounded-full border border-emerald-200/50">
+                      <span className="skeuo-pressed text-emerald-600 text-[10px] font-bold px-3 py-1 rounded-full">
                         Current Tier
                       </span>
                     )}
                   </div>
                   
                   <div>
-                    <h3 className="font-bold text-slate-800 text-sm">{tier.name}</h3>
-                    <p className="text-[10px] text-slate-400 mt-0.5 font-semibold">{tier.tagline}</p>
+                    <h3 className="font-bold text-slate-900 text-base">{tier.name}</h3>
+                    <p className="text-[11px] text-slate-600 mt-1 font-bold">{tier.tagline}</p>
                   </div>
                 </div>
 
                 {/* Pricing info */}
-                <div className="border-t border-slate-200/60 pt-4">
+                <div className="py-2">
                   <div className="flex items-baseline gap-1">
-                    <span className="text-2xl font-bold font-display text-slate-800">
+                    <span className="text-3xl font-bold font-display text-slate-900">
                       ${price}
                     </span>
                     {tier.monthlyPrice > 0 && (
-                      <span className="text-xs text-slate-400 font-bold">{periodLabel}</span>
+                      <span className="text-xs text-slate-600 font-bold">{periodLabel}</span>
                     )}
                   </div>
                   {billingPeriod === 'annual' && tier.monthlyPrice > 0 && (
-                    <p className="text-[10px] text-slate-400 mt-1 font-semibold">
+                    <p className="text-[10px] text-slate-500 mt-1.5 font-bold">
                       Billed annually (equals ${(price / 12).toFixed(2)}/mo)
                     </p>
                   )}
                 </div>
 
                 {/* Features check list */}
-                <div className="border-t border-slate-200/60 pt-4 space-y-3">
-                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block">
+                <div className="pt-2 space-y-4">
+                  <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest block pl-1">
                     What's Included
                   </span>
                   
-                  <ul className="space-y-2.5">
+                  <ul className="space-y-3">
                     {tier.features.map((feat, index) => (
-                      <li key={index} className="flex items-start gap-2 text-[11px] text-slate-650 font-semibold leading-relaxed">
-                        <Check className="h-3.5 w-3.5 text-indigo-650 mt-0.5 flex-shrink-0" />
+                      <li key={index} className="flex items-start gap-3 text-[11px] text-slate-700 font-bold leading-relaxed">
+                        <div className="mt-0.5 skeuo-pressed p-0.5 rounded-full">
+                          <Check className="h-3 w-3 text-indigo-500 flex-shrink-0" />
+                        </div>
                         <span>{feat}</span>
                       </li>
                     ))}
@@ -264,11 +265,11 @@ export const PricingPage: React.FC = () => {
               </div>
 
               {/* Action Button */}
-              <div className="mt-8 pt-4 border-t border-slate-200/60">
+              <div className="mt-8 pt-4">
                 {tier.id === 'free' ? (
                   <button
                     disabled
-                    className="w-full py-2.5 rounded-full border border-slate-200 bg-slate-55/60 text-xs font-bold text-slate-400 text-center"
+                    className="w-full py-3.5 rounded-2xl skeuo-pressed text-xs font-bold text-slate-500 text-center"
                   >
                     {isCurrentTier ? 'Active Free Account' : 'Standard Access'}
                   </button>
@@ -276,25 +277,25 @@ export const PricingPage: React.FC = () => {
                   <button
                     onClick={() => handleSubscriptionAction(tier.id)}
                     disabled={loadingTier !== null}
-                    className={`w-full py-2.5 rounded-full text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
+                    className={`w-full py-3.5 rounded-2xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
                       isCurrentTier
-                        ? 'bg-gray-900 hover:bg-gray-800 text-white shadow-sm'
+                        ? 'skeuo-pressed text-slate-700'
                         : tier.popular
-                        ? 'bg-indigo-650 hover:bg-indigo-550 text-white shadow-md shadow-indigo-650/15'
-                        : 'border-2 border-indigo-200 text-indigo-650 hover:bg-indigo-50/30'
+                        ? 'skeuo-raised-accent text-white active:skeuo-pressed'
+                        : 'skeuo-raised text-indigo-600 active:skeuo-pressed'
                     }`}
                   >
                     {loadingTier === tier.id ? (
                       <span className="h-4 w-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
                     ) : isCurrentTier ? (
                       <>
-                        <CreditCard className="h-3.5 w-3.5" />
+                        <CreditCard className="h-4 w-4" />
                         Manage Billing
                       </>
                     ) : (
                       <>
                         Upgrade Tier
-                        <ChevronRight className="h-3.5 w-3.5" />
+                        <ChevronRight className="h-4 w-4 opacity-70" />
                       </>
                     )}
                   </button>
@@ -303,29 +304,6 @@ export const PricingPage: React.FC = () => {
             </div>
           );
         })}
-      </div>
-
-      {/* Stripe and Security assurance widget */}
-      <div className="bg-white/60 backdrop-blur-md ring-1 ring-gray-200/80 rounded-3xl p-6 flex flex-col md:flex-row items-center justify-between gap-4 shadow-sm">
-        <div className="flex items-center gap-3 text-left">
-          <div className="h-10 w-10 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center">
-            <Shield className="h-5 w-5" />
-          </div>
-          <div>
-            <h4 className="text-xs font-bold text-slate-805">Secure Billing by Stripe</h4>
-            <p className="text-[10px] text-slate-450 mt-0.5 font-medium">Your payment credentials are processed securely and never saved on our databases.</p>
-          </div>
-        </div>
-        
-        <a 
-          href="https://stripe.com" 
-          target="_blank" 
-          rel="noreferrer"
-          className="text-xs font-bold text-slate-550 hover:text-slate-800 flex items-center gap-1.5 border border-slate-205 px-4.5 py-2 rounded-full hover:bg-white transition-all shadow-sm"
-        >
-          stripe.com
-          <ExternalLink className="h-3.5 w-3.5" />
-        </a>
       </div>
     </div>
   );

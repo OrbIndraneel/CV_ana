@@ -35,13 +35,13 @@ export const ScoreDashboard: React.FC<ScoreDashboardProps> = ({
 
   if (report.status === 'pending' || report.status === 'processing') {
     return (
-      <div className="bg-white/60 backdrop-blur-md rounded-3xl ring-1 ring-gray-200/80 p-12 text-center shadow-sm max-w-xl mx-auto flex flex-col items-center justify-center gap-4 animate-pulse">
-        <div className="h-12 w-12 rounded-xl bg-amber-50 text-amber-500 flex items-center justify-center shadow-inner">
-          <Activity className="h-6 w-6 animate-spin" />
+      <div className="skeuo-panel p-16 text-center max-w-xl mx-auto flex flex-col items-center justify-center gap-5 animate-pulse">
+        <div className="h-16 w-16 rounded-2xl skeuo-pressed text-amber-500 flex items-center justify-center">
+          <Activity className="h-8 w-8 animate-spin" />
         </div>
         <div>
-          <h3 className="font-bold text-slate-800 text-base">NLP Scan In Progress...</h3>
-          <p className="text-xs text-slate-500 mt-1">Celery processes, similarity comparisons, and layout checkers are currently running.</p>
+          <h3 className="font-bold text-slate-900 text-lg">NLP Scan In Progress...</h3>
+          <p className="text-xs text-slate-600 mt-2 font-medium leading-relaxed max-w-xs">Celery processes, similarity comparisons, and layout checkers are currently running.</p>
         </div>
       </div>
     );
@@ -49,13 +49,13 @@ export const ScoreDashboard: React.FC<ScoreDashboardProps> = ({
 
   if (report.status === 'failed') {
     return (
-      <div className="bg-white/60 backdrop-blur-md rounded-3xl ring-1 ring-gray-200/80 p-12 text-center shadow-sm max-w-xl mx-auto flex flex-col items-center justify-center gap-4">
-        <div className="h-12 w-12 rounded-xl bg-rose-50 text-rose-500 flex items-center justify-center">
-          <AlertCircle className="h-6 w-6" />
+      <div className="skeuo-panel p-16 text-center max-w-xl mx-auto flex flex-col items-center justify-center gap-5">
+        <div className="h-16 w-16 rounded-2xl skeuo-pressed text-rose-500 flex items-center justify-center">
+          <AlertCircle className="h-8 w-8" />
         </div>
         <div>
-          <h3 className="font-bold text-slate-800 text-base">NLP Evaluation Failed</h3>
-          <p className="text-xs text-slate-500 mt-1">An error occurred during text extraction or sentence-transformer computations.</p>
+          <h3 className="font-bold text-slate-900 text-lg">NLP Evaluation Failed</h3>
+          <p className="text-xs text-slate-600 mt-2 font-medium leading-relaxed max-w-xs">An error occurred during text extraction or sentence-transformer computations.</p>
         </div>
       </div>
     );
@@ -64,10 +64,10 @@ export const ScoreDashboard: React.FC<ScoreDashboardProps> = ({
   // Prepping chart data
   const chartData = [
     { name: 'ATS Layout', score: report.ats_score || 0, fill: '#6366f1' },
-    { name: 'Keywords Match', score: report.keyword_score || 0, fill: '#a855f7' },
-    { name: 'Semantic similarity', score: report.semantic_score || 0, fill: '#10b981' },
+    { name: 'Keywords', score: report.keyword_score || 0, fill: '#a855f7' },
+    { name: 'Semantic', score: report.semantic_score || 0, fill: '#10b981' },
     { name: 'Bullet Quality', score: report.bullet_quality_score || 0, fill: '#f59e0b' },
-    { name: 'Formatting check', score: report.formatting_score || 0, fill: '#ef4444' },
+    { name: 'Formatting', score: report.formatting_score || 0, fill: '#ef4444' },
   ];
 
   const overallScoreVal = Math.round(report.overall_score || 0);
@@ -82,46 +82,48 @@ export const ScoreDashboard: React.FC<ScoreDashboardProps> = ({
   const grade = getTalentGrade(overallScoreVal);
 
   return (
-    <div className="space-y-8 animate-fade-in">
+    <div className="space-y-10 animate-fade-in pb-8">
       {/* Report Header */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-200 pb-5">
+      <div className="flex flex-col xl:flex-row justify-between items-start xl:items-center gap-6 skeuo-panel p-8">
         <div>
-          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest bg-slate-100 px-2.5 py-1 rounded-full">
+          <span className="text-[10px] font-bold text-slate-600 uppercase tracking-widest skeuo-pressed px-3 py-1.5 rounded-full inline-block">
             Detailed Audit Report
           </span>
-          <h2 className="text-2xl font-bold font-display text-slate-800 mt-2 flex items-center gap-2">
-            <Briefcase className="h-6 w-6 text-slate-400" />
+          <h2 className="text-2xl font-bold font-display text-slate-900 mt-4 flex items-center gap-3">
+            <div className="h-10 w-10 skeuo-raised rounded-full flex items-center justify-center">
+              <Briefcase className="h-5 w-5 text-indigo-600" />
+            </div>
             {resumeFilename}
           </h2>
-          <p className="text-xs text-slate-500 mt-1 flex items-center gap-1.5">
-            <span>Compared against: <strong className="text-slate-700">{jobTitle}</strong></span>
-            <span>•</span>
+          <div className="text-xs text-slate-600 mt-3 flex items-center gap-2 font-bold bg-white/40 p-2 px-4 rounded-xl border border-white/20 inline-flex">
+            <span>Compared against: <strong className="text-slate-900">{jobTitle}</strong></span>
+            <span className="text-[#825D43] mx-1">•</span>
             <span>Role Category: <strong className="text-indigo-600">{report.role_detected || 'Unknown'}</strong></span>
-          </p>
+          </div>
         </div>
 
         {/* Tab Controls */}
-        <div className="flex bg-slate-100/80 p-1 rounded-full border border-slate-200/60">
+        <div className="flex skeuo-pressed p-2 rounded-[20px] shrink-0 w-full xl:w-auto overflow-x-auto hide-scrollbar">
           <button
             onClick={() => setActiveTab('summary')}
-            className={`px-4.5 py-2 text-xs font-bold rounded-full transition-all cursor-pointer ${
-              activeTab === 'summary' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-800'
+            className={`px-6 py-3 text-xs font-bold rounded-2xl transition-all cursor-pointer whitespace-nowrap ${
+              activeTab === 'summary' ? 'skeuo-raised text-indigo-600' : 'text-slate-600 hover:text-slate-800 hover:bg-[#5C432E]/50'
             }`}
           >
             Diagnostics
           </button>
           <button
             onClick={() => setActiveTab('keywords')}
-            className={`px-4.5 py-2 text-xs font-bold rounded-full transition-all cursor-pointer ${
-              activeTab === 'keywords' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-800'
+            className={`px-6 py-3 text-xs font-bold rounded-2xl transition-all cursor-pointer whitespace-nowrap ${
+              activeTab === 'keywords' ? 'skeuo-raised text-indigo-600' : 'text-slate-600 hover:text-slate-800 hover:bg-[#5C432E]/50'
             }`}
           >
             Keywords Grid
           </button>
           <button
             onClick={() => setActiveTab('bullets')}
-            className={`px-4.5 py-2 text-xs font-bold rounded-full transition-all cursor-pointer ${
-              activeTab === 'bullets' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-800'
+            className={`px-6 py-3 text-xs font-bold rounded-2xl transition-all cursor-pointer whitespace-nowrap ${
+              activeTab === 'bullets' ? 'skeuo-raised text-indigo-600' : 'text-slate-600 hover:text-slate-800 hover:bg-[#5C432E]/50'
             }`}
           >
             Bullet Grader
@@ -133,49 +135,58 @@ export const ScoreDashboard: React.FC<ScoreDashboardProps> = ({
       {activeTab === 'summary' && (
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-stretch">
           {/* Top Gradient Talents Card */}
-          <div className={`lg:col-span-2 rounded-3xl p-8 text-white relative overflow-hidden flex flex-col justify-between shadow-lg shadow-indigo-600/10 bg-gradient-to-br ${grade.style}`}>
+          <div className={`lg:col-span-2 rounded-[32px] p-8 text-white relative overflow-hidden flex flex-col justify-between shadow-xl bg-gradient-to-br ${grade.style}`}>
             {/* Background patterns */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,rgba(255,255,255,0.15),transparent_45%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,rgba(255,255,255,0.2),transparent_45%)]" />
+            <div className="absolute inset-0 ring-1 ring-inset ring-white/20 rounded-[32px]" />
             
-            <div className="relative z-10 space-y-4">
+            <div className="relative z-10 space-y-6">
               <div className="flex items-center justify-between">
-                <span className="text-[10px] font-bold tracking-widest uppercase bg-white/20 px-2.5 py-1 rounded-full">
+                <span className="text-[10px] font-bold tracking-widest uppercase bg-black/20 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10">
                   Compatibility Rating
                 </span>
-                <Award className="h-6 w-6 text-white/80" />
+                <div className="h-10 w-10 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20">
+                  <Award className="h-5 w-5 text-white" />
+                </div>
               </div>
-              <div>
-                <p className="text-6xl font-bold font-display tracking-tight">{overallScoreVal}%</p>
-                <p className="text-lg font-bold font-display tracking-wide mt-2">{grade.label}</p>
-                <p className="text-xs text-white/80 leading-relaxed mt-1">{grade.desc}</p>
+              <div className="pt-2">
+                <p className="text-7xl font-bold font-display tracking-tight drop-shadow-md">{overallScoreVal}%</p>
+                <p className="text-xl font-bold font-display tracking-wide mt-3 drop-shadow-sm">{grade.label}</p>
+                <p className="text-[13px] text-white/90 leading-relaxed mt-2 font-medium">{grade.desc}</p>
               </div>
             </div>
 
-            <div className="relative z-10 pt-8 mt-8 border-t border-white/25 flex items-center justify-between text-[11px] font-medium text-white/90">
-              <span>Classifier: AI Talent Scorer</span>
-              <span>Score Weight Matrix active</span>
+            <div className="relative z-10 pt-6 mt-8 border-t border-white/20 flex items-center justify-between text-[10px] font-bold text-white/80 uppercase tracking-widest">
+              <span>AI Talent Scorer</span>
+              <span>Weight Matrix Active</span>
             </div>
           </div>
 
           {/* Sub-component Radar / Bar Breakdown Chart */}
-          <div className="lg:col-span-3 bg-white/60 backdrop-blur-md rounded-3xl ring-1 ring-gray-200/80 p-6 shadow-sm flex flex-col justify-between">
-            <div>
-              <h3 className="text-sm font-bold text-slate-400 uppercase tracking-wider">Metrics Breakdown</h3>
-              <p className="text-xs text-slate-500 mt-0.5">Performance index across five critical evaluation sectors.</p>
+          <div className="lg:col-span-3 skeuo-panel p-8 flex flex-col justify-between">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider">Metrics Breakdown</h3>
+                <p className="text-[11px] text-slate-600 mt-1 font-bold">Performance index across five critical evaluation sectors.</p>
+              </div>
+              <div className="h-10 w-10 skeuo-pressed rounded-full flex items-center justify-center text-indigo-500">
+                <Activity className="h-5 w-5" />
+              </div>
             </div>
 
             {/* Recharts Bar representation */}
-            <div className="h-60 w-full mt-4 flex items-center justify-center">
+            <div className="h-64 w-full mt-6 flex items-center justify-center skeuo-pressed rounded-3xl p-4 pt-8 border border-white/50">
               <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={chartData} margin={{ top: 20, right: 20, left: -20, bottom: 0 }}>
-                  <XAxis dataKey="name" tick={{ fill: '#64748b', fontSize: 10, fontWeight: 550 }} axisLine={false} tickLine={false} />
-                  <YAxis domain={[0, 100]} tick={{ fill: '#94a3b8', fontSize: 9 }} axisLine={false} tickLine={false} />
+                <BarChart data={chartData} margin={{ top: 10, right: 10, left: -25, bottom: 0 }}>
+                  <XAxis dataKey="name" tick={{ fill: '#64748b', fontSize: 10, fontWeight: 700 }} axisLine={false} tickLine={false} />
+                  <YAxis domain={[0, 100]} tick={{ fill: '#94a3b8', fontSize: 10, fontWeight: 700 }} axisLine={false} tickLine={false} />
                   <Tooltip 
-                    contentStyle={{ background: '#0f172a', borderRadius: '12px', border: 'none', color: '#f8fafc' }}
-                    labelStyle={{ fontWeight: 'bold', fontSize: '11px', color: '#cbd5e1' }}
-                    itemStyle={{ fontSize: '11px', color: '#818cf8' }}
+                    contentStyle={{ background: '#F5F6FA', borderRadius: '16px', border: '1px solid #e2e8f0', color: '#0f172a', boxShadow: '6px 6px 12px #D2D6DF, -6px -6px 12px #ffffff' }}
+                    labelStyle={{ fontWeight: 'bold', fontSize: '11px', color: '#64748b' }}
+                    itemStyle={{ fontSize: '12px', color: '#6366f1', fontWeight: 'bold' }}
+                    cursor={{ fill: 'rgba(0,0,0,0.02)' }}
                   />
-                  <Bar dataKey="score" radius={[8, 8, 0, 0]} barSize={38}>
+                  <Bar dataKey="score" radius={[8, 8, 8, 8]} barSize={32}>
                     {chartData.map((entry, index) => (
                       <Cell key={`cell-${index}`} fill={entry.fill} />
                     ))}

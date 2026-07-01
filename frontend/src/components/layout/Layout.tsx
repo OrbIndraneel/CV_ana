@@ -32,8 +32,8 @@ export const Layout: React.FC<LayoutProps> = ({
   }, [dispatch]);
 
   return (
-    <div className="flex h-screen w-screen overflow-hidden bg-slate-50 font-sans text-slate-800 antialiased">
-      {/* Dual sidebar panels */}
+    <div className="flex h-screen w-screen overflow-hidden bg-mesh-gradient font-sans text-slate-900 antialiased">
+      {/* Single sidebar panel */}
       <Sidebar currentTab={currentTab} setCurrentTab={setCurrentTab} />
 
       {/* Main Content Area */}
@@ -42,7 +42,7 @@ export const Layout: React.FC<LayoutProps> = ({
         <Navbar onQuickUpload={onQuickUpload} />
 
         {/* Scrollable Viewport */}
-        <main className="flex-1 overflow-y-auto bg-slate-50/30 p-8">
+        <main className="flex-1 overflow-y-auto p-8">
           <div className="max-w-7xl mx-auto space-y-8 animate-slide-up">
             {children}
           </div>

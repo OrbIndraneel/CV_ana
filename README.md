@@ -105,4 +105,4 @@ CV_ana/
 ```
 
 ## 📜 License
-[MIT License](LICENSE)
+[Proprietary License](LICENSE.md) - All Rights Reserved.

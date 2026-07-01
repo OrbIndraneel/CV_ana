@@ -46,40 +46,40 @@ export const JDInput: React.FC<JDInputProps> = ({ onSuccess, onClose }) => {
   };
 
   return (
-    <div className="bg-white/90 backdrop-blur-xl rounded-3xl ring-1 ring-gray-200/80 shadow-2xl p-6 max-w-xl w-full animate-slide-up relative">
+    <div className="skeuo-panel p-8 max-w-xl w-full animate-slide-up relative">
       {onClose && (
         <button 
           onClick={onClose}
-          className="absolute top-4 right-4 p-1.5 rounded-full text-slate-400 hover:text-slate-600 hover:bg-slate-100/50 transition-all cursor-pointer"
+          className="absolute top-6 right-6 p-2 rounded-full text-slate-500 hover:text-slate-700 transition-all cursor-pointer skeuo-raised active:skeuo-pressed"
         >
           <X className="h-4.5 w-4.5" />
         </button>
       )}
 
-      <div className="mb-5">
-        <h2 className="text-xl font-bold font-display text-slate-800">Add Job Description</h2>
-        <p className="text-xs text-slate-505 mt-1">
+      <div className="mb-6">
+        <h2 className="text-xl font-bold font-display text-slate-900">Add Job Description</h2>
+        <p className="text-xs text-slate-600 mt-1.5 font-medium pr-8">
           Paste a target job opening. SpaCy will analyze requirements and extract core skills.
         </p>
       </div>
 
       {success ? (
-        <div className="py-12 flex flex-col items-center justify-center text-center animate-fade-in">
-          <div className="h-14 w-14 rounded-full bg-emerald-50 text-emerald-500 flex items-center justify-center shadow-inner mb-4">
+        <div className="py-12 flex flex-col items-center justify-center text-center animate-fade-in skeuo-pressed rounded-[24px]">
+          <div className="h-16 w-16 rounded-full skeuo-raised text-emerald-600 flex items-center justify-center mb-5">
             <CheckCircle className="h-8 w-8" />
           </div>
-          <h3 className="font-bold text-slate-800 text-base">Opening Saved Successfully!</h3>
-          <p className="text-xs text-slate-505 mt-1">Extracted skills and role mappings complete.</p>
+          <h3 className="font-bold text-slate-900 text-base">Opening Saved Successfully!</h3>
+          <p className="text-xs text-slate-600 mt-1.5 font-bold">Extracted skills and role mappings complete.</p>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="grid grid-cols-2 gap-6">
             <div>
-              <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">
-                Job Title <span className="text-indigo-400">*</span>
+              <label className="block text-[10px] font-bold text-slate-600 uppercase tracking-widest mb-3 pl-2">
+                Job Title <span className="text-indigo-500">*</span>
               </label>
               <div className="relative">
-                <span className="absolute inset-y-0 left-3.5 flex items-center pointer-events-none text-slate-400">
+                <span className="absolute inset-y-0 left-4 flex items-center pointer-events-none text-slate-500">
                   <Briefcase className="h-4.5 w-4.5" />
                 </span>
                 <input
@@ -88,17 +88,17 @@ export const JDInput: React.FC<JDInputProps> = ({ onSuccess, onClose }) => {
                   placeholder="Senior React Engineer"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  className="w-full h-11 bg-slate-50 border border-slate-200 rounded-full pl-10 pr-4 text-xs text-slate-700 focus:outline-none focus:bg-white focus:border-gray-400 focus:ring-2 focus:ring-slate-100 transition-all"
+                  className="w-full h-12 skeuo-pressed rounded-full pl-11 pr-5 text-xs text-slate-900 focus:outline-none font-bold"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">
-                Company Name <span className="text-indigo-400">*</span>
+              <label className="block text-[10px] font-bold text-slate-600 uppercase tracking-widest mb-3 pl-2">
+                Company Name <span className="text-indigo-500">*</span>
               </label>
               <div className="relative">
-                <span className="absolute inset-y-0 left-3.5 flex items-center pointer-events-none text-slate-400">
+                <span className="absolute inset-y-0 left-4 flex items-center pointer-events-none text-slate-500">
                   <Building className="h-4.5 w-4.5" />
                 </span>
                 <input
@@ -107,18 +107,18 @@ export const JDInput: React.FC<JDInputProps> = ({ onSuccess, onClose }) => {
                   placeholder="Stripe, Inc."
                   value={company}
                   onChange={(e) => setCompany(e.target.value)}
-                  className="w-full h-11 bg-slate-50 border border-slate-200 rounded-full pl-10 pr-4 text-xs text-slate-700 focus:outline-none focus:bg-white focus:border-gray-400 focus:ring-2 focus:ring-slate-100 transition-all"
+                  className="w-full h-12 skeuo-pressed rounded-full pl-11 pr-5 text-xs text-slate-900 focus:outline-none font-bold"
                 />
               </div>
             </div>
           </div>
 
           <div>
-            <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">
-              Full Job Description Text <span className="text-indigo-400">*</span>
+            <label className="block text-[10px] font-bold text-slate-600 uppercase tracking-widest mb-3 pl-2">
+              Full Job Description Text <span className="text-indigo-500">*</span>
             </label>
             <div className="relative">
-              <span className="absolute top-3.5 left-3.5 text-slate-400">
+              <span className="absolute top-4 left-4 text-slate-500">
                 <FileText className="h-4.5 w-4.5" />
               </span>
               <textarea
@@ -127,23 +127,23 @@ export const JDInput: React.FC<JDInputProps> = ({ onSuccess, onClose }) => {
                 placeholder="Paste the job duties, requirements, keywords, tech stack, and background expectations here..."
                 value={rawText}
                 onChange={(e) => setRawText(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-200 rounded-2xl pl-10.5 pr-4 py-3 text-xs text-slate-705 focus:outline-none focus:bg-white focus:border-gray-400 focus:ring-2 focus:ring-slate-100 transition-all resize-none leading-relaxed"
+                className="w-full skeuo-pressed rounded-3xl pl-11 pr-5 py-4 text-xs text-slate-900 focus:outline-none resize-none leading-relaxed font-medium"
               />
             </div>
           </div>
 
           {errorMsg && (
-            <div className="bg-rose-500/10 border border-rose-500/20 rounded-2xl p-4 text-xs text-rose-500 animate-slide-up">
+            <div className="skeuo-pressed border-l-4 border-rose-500 rounded-2xl p-5 text-xs text-rose-600 animate-slide-up font-bold">
               {errorMsg}
             </div>
           )}
 
-          <div className="flex gap-3 pt-2">
+          <div className="flex gap-4 pt-4">
             {onClose && (
               <button
                 type="button"
                 onClick={onClose}
-                className="flex-1 h-11 border border-slate-200 hover:bg-slate-100/60 text-slate-600 text-xs font-bold rounded-full transition-all cursor-pointer"
+                className="flex-1 h-12 skeuo-raised text-slate-700 text-xs font-bold rounded-full transition-all cursor-pointer active:skeuo-pressed"
               >
                 Cancel
               </button>
@@ -151,7 +151,11 @@ export const JDInput: React.FC<JDInputProps> = ({ onSuccess, onClose }) => {
             <button
               type="submit"
               disabled={!rawText || loading}
-              className="flex-1 h-11 bg-gray-900 hover:bg-indigo-650 disabled:bg-slate-200 disabled:text-slate-400 text-white text-xs font-bold rounded-full shadow-sm hover:shadow-md transition-all cursor-pointer flex items-center justify-center gap-2"
+              className={`flex-1 h-12 text-white text-xs font-bold rounded-full transition-all flex items-center justify-center gap-2 ${
+                !rawText || loading 
+                  ? 'bg-[#2f2016] opacity-50 cursor-not-allowed' 
+                  : 'skeuo-raised-accent cursor-pointer active:skeuo-pressed'
+              }`}
             >
               {loading ? (
                 <>

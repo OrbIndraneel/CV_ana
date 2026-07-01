@@ -21,18 +21,18 @@ export const SemanticHeatmap: React.FC<SemanticHeatmapProps> = ({ keywords }) =>
       case 'medium':
         return 'bg-amber-900/10 text-amber-700 border-amber-200/50';
       default:
-        return 'bg-slate-100 text-slate-500 border-slate-200/50';
+        return 'bg-[#4a3424] text-slate-600 border-[#4a3424]/50';
     }
   };
 
   return (
     <div className="bg-white/60 backdrop-blur-md rounded-3xl ring-1 ring-gray-200/80 shadow-sm p-6 space-y-5 animate-fade-in">
       <div>
-        <h3 className="text-lg font-bold font-display text-slate-800 flex items-center gap-2">
+        <h3 className="text-lg font-bold font-display text-slate-900 flex items-center gap-2">
           <Target className="h-5 w-5 text-indigo-500" />
           Keyword Coverage & Synonym Match
         </h3>
-        <p className="text-xs text-slate-500 mt-1">
+        <p className="text-xs text-slate-600 mt-1">
           Identifies critical job description terms found directly or through semantically similar terms.
         </p>
       </div>
@@ -81,7 +81,7 @@ export const SemanticHeatmap: React.FC<SemanticHeatmapProps> = ({ keywords }) =>
                 )}
                 
                 {isSynonym && (
-                  <span className="text-slate-400 max-w-[80px] truncate font-medium">
+                  <span className="text-slate-500 max-w-[80px] truncate font-medium">
                     ({kw.synonyms_used[0]})
                   </span>
                 )}
@@ -92,7 +92,7 @@ export const SemanticHeatmap: React.FC<SemanticHeatmapProps> = ({ keywords }) =>
       </div>
 
       {/* Legend */}
-      <div className="flex flex-wrap gap-4 pt-3 border-t border-slate-100 text-[10px] font-semibold text-slate-500">
+      <div className="flex flex-wrap gap-4 pt-3 border-t border-[#5C432E] text-[10px] font-semibold text-slate-600">
         <div className="flex items-center gap-1.5">
           <span className="h-3 w-3 rounded-md bg-emerald-500/20 border border-emerald-400" />
           <span>Exact Match</span>

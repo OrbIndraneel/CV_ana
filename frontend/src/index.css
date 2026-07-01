@@ -72,7 +72,7 @@
 }
 
 body {
-  background-color: var(--color-bg-main);
+  background-color: #F5F6FA;
   color: var(--color-text-main);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
@@ -265,5 +265,67 @@ html.dark {
   .animate-hero-rise {
     animation: none !important;
   }
+}
+
+/* ==========================================
+   SKEUOMORPHISM UTILITIES
+   ========================================== */
+
+/* Raised object (outset shadow) */
+.skeuo-raised {
+  background: #F5F6FA;
+  box-shadow: 
+    6px 6px 12px #D2D6DF,
+    -6px -6px 12px #ffffff;
+  transition: all 0.2s ease-in-out;
+}
+
+
+.skeuo-raised:hover {
+  box-shadow: 
+    8px 8px 16px #D2D6DF,
+    -8px -8px 16px #ffffff;
+  transform: translateY(-2px);
+}
+
+/* Pressed object (inset shadow) */
+.skeuo-pressed {
+  background: #F5F6FA;
+  box-shadow: 
+    inset 4px 4px 8px #D2D6DF,
+    inset -4px -4px 8px #ffffff;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Base Panel */
+.skeuo-panel {
+  background: #F5F6FA;
+  box-shadow: 
+    8px 8px 16px #D2D6DF,
+    -8px -8px 16px #ffffff;
+  border-radius: 24px;
+}
+
+/* Accent Raised (e.g. Primary Button) */
+.skeuo-raised-accent {
+  background: linear-gradient(145deg, #6a6ef0, #595ddb);
+  box-shadow: 
+    4px 4px 8px #4a4dbe,
+    -4px -4px 8px #7c85ff;
+  color: white;
+}
+
+.skeuo-raised-accent:active {
+  background: #6366f1;
+  box-shadow: 
+    inset 4px 4px 8px #4a4dbe,
+    inset -4px -4px 8px #7c85ff;
+}
+
+.bg-mesh-gradient {
+  background: 
+    radial-gradient(circle at 10% 10%, rgba(85,90,255,0.10), transparent 35%),
+    radial-gradient(circle at 90% 70%, rgba(108,99,255,0.08), transparent 30%),
+    #F5F6FA;
 }
 

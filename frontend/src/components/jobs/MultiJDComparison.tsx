@@ -33,26 +33,26 @@ export const MultiJDComparison: React.FC = () => {
   };
 
   return (
-    <div className="space-y-8 animate-fade-in">
+    <div className="space-y-8 animate-fade-in pb-8">
       {/* Configuration Header Card */}
-      <div className="bg-white/60 backdrop-blur-md rounded-3xl ring-1 ring-gray-200/80 shadow-sm p-6 space-y-6">
+      <div className="skeuo-panel p-8 space-y-8">
         <div>
-          <h3 className="text-lg font-bold font-display text-slate-800">Role Compatibility Matrix</h3>
-          <p className="text-xs text-slate-500 mt-1">
+          <h3 className="text-xl font-bold font-display text-slate-900">Role Compatibility Matrix</h3>
+          <p className="text-xs text-slate-600 mt-1 font-medium">
             Compare a single resume across multiple job openings to identify the best structural alignment.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-end">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-end">
           {/* Resume Selection */}
           <div className="md:col-span-1">
-            <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">
+            <label className="block text-[10px] font-bold text-slate-600 uppercase tracking-widest mb-3 pl-2">
               Select Candidate Resume
             </label>
             <select
               value={selectedResumeId}
               onChange={(e) => setSelectedResumeId(e.target.value)}
-              className="w-full h-11 px-4 bg-slate-50 border border-slate-205 rounded-full text-xs text-slate-700 focus:outline-none focus:border-gray-400 focus:ring-2 focus:ring-slate-105 transition-all"
+              className="w-full h-12 px-5 skeuo-pressed rounded-full text-xs text-slate-900 font-bold focus:outline-none transition-all"
             >
               <option value="">-- Choose Resume --</option>
               {resumes.map((r) => (
@@ -65,20 +65,20 @@ export const MultiJDComparison: React.FC = () => {
 
           {/* Job Openings Checklist */}
           <div className="md:col-span-1">
-            <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">
+            <label className="block text-[10px] font-bold text-slate-600 uppercase tracking-widest mb-3 pl-2">
               Select Job Openings ({selectedJDIds.length} chosen)
             </label>
-            <div className="border border-slate-200 rounded-2xl bg-slate-50 p-2.5 max-h-[120px] overflow-y-auto space-y-1.5">
+            <div className="skeuo-pressed rounded-3xl p-3 max-h-[140px] overflow-y-auto space-y-1.5 hide-scrollbar">
               {jobDescriptions.length === 0 ? (
-                <span className="text-xs text-slate-400 p-2 block font-semibold">No jobs configured yet.</span>
+                <span className="text-xs text-slate-500 p-2 block font-bold text-center mt-4">No jobs configured yet.</span>
               ) : (
                 jobDescriptions.map((jd) => (
-                  <label key={jd.id} className="flex items-center gap-2 px-2.5 py-1 hover:bg-slate-100/60 rounded-full cursor-pointer text-xs text-slate-700 font-semibold">
+                  <label key={jd.id} className="flex items-center gap-3 px-3 py-2 hover:bg-[#5C432E]/50 rounded-full cursor-pointer text-xs text-slate-800 font-bold transition-all">
                     <input
                       type="checkbox"
                       checked={selectedJDIds.includes(jd.id)}
                       onChange={() => handleJDCheckboxChange(jd.id)}
-                      className="rounded border-slate-305 text-indigo-650 focus:ring-indigo-550 h-3.5 w-3.5"
+                      className="rounded border-[#3a281c] text-indigo-600 focus:ring-indigo-500 h-4 w-4"
                     />
                     <span className="truncate">{jd.title} ({jd.company})</span>
                   </label>
@@ -92,7 +92,11 @@ export const MultiJDComparison: React.FC = () => {
             <button
               onClick={handleCompare}
               disabled={!selectedResumeId || selectedJDIds.length === 0 || loading}
-              className="w-full h-11 bg-gray-900 hover:bg-indigo-650 disabled:bg-slate-200 disabled:text-slate-400 text-white text-xs font-bold rounded-full shadow-sm hover:shadow-md transition-all cursor-pointer flex items-center justify-center gap-2"
+              className={`w-full h-12 text-white text-xs font-bold rounded-full transition-all flex items-center justify-center gap-2 ${
+                !selectedResumeId || selectedJDIds.length === 0 || loading
+                  ? 'bg-[#2f2016] opacity-50 cursor-not-allowed'
+                  : 'skeuo-raised-accent cursor-pointer active:skeuo-pressed'
+              }`}
             >
               {loading ? (
                 <span className="h-5 w-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -108,7 +112,7 @@ export const MultiJDComparison: React.FC = () => {
       </div>
 
       {error && (
-        <div className="bg-rose-500/10 border border-rose-500/20 rounded-2xl p-4 text-xs text-rose-550 flex items-center gap-2">
+        <div className="skeuo-pressed border-l-4 border-rose-500 rounded-2xl p-5 text-xs text-rose-600 flex items-center gap-3 font-bold animate-slide-up">
           <AlertCircle className="h-4.5 w-4.5" />
           <span>{error}</span>
         </div>
@@ -116,7 +120,7 @@ export const MultiJDComparison: React.FC = () => {
 
       {/* Comparisons Matrix Grid */}
       {comparisonResults.length > 0 && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch animate-slide-up">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch animate-slide-up">
           {comparisonResults.map((result) => {
             const matchedJD = jobDescriptions.find((jd) => jd.id === result.job_description_id);
             const scoreVal = Math.round(result.overall_score || 0);
@@ -124,10 +128,10 @@ export const MultiJDComparison: React.FC = () => {
             return (
               <div 
                 key={result.id} 
-                className="bg-white/60 backdrop-blur-md rounded-3xl ring-1 ring-gray-200/80 shadow-sm p-6 flex flex-col justify-between hover:shadow-md transition-all relative overflow-hidden"
+                className="skeuo-panel p-8 flex flex-col justify-between relative overflow-hidden group"
               >
                 {/* Visual Accent */}
-                <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${
+                <div className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${
                   scoreVal >= 80 
                     ? 'from-emerald-400 to-indigo-500' 
                     : scoreVal >= 60 
@@ -136,47 +140,47 @@ export const MultiJDComparison: React.FC = () => {
                 }`} />
 
                 <div>
-                  <div className="mb-4">
-                    <span className="text-[9px] font-bold text-indigo-600 uppercase tracking-widest bg-indigo-50 px-2 py-0.5 rounded-full">
+                  <div className="mb-6">
+                    <span className="text-[9px] font-bold text-indigo-600 uppercase tracking-widest skeuo-pressed px-3 py-1.5 rounded-full inline-block">
                       {result.role_detected || 'Software Role'}
                     </span>
-                    <h4 className="font-bold text-slate-800 text-sm mt-1.5 truncate">
+                    <h4 className="font-bold text-slate-900 text-base mt-4 truncate">
                       {matchedJD?.title || 'Job Opening'}
                     </h4>
-                    <p className="text-xs text-slate-500">{matchedJD?.company || 'Company'}</p>
+                    <p className="text-xs text-slate-600 font-bold mt-1">{matchedJD?.company || 'Company'}</p>
                   </div>
 
                   {/* Compatibility Circle */}
-                  <div className="my-6 flex items-center gap-4">
-                    <div className={`h-16 w-16 rounded-full border-4 flex items-center justify-center font-display font-bold text-xl ${
+                  <div className="my-8 flex items-center gap-5 skeuo-pressed p-4 rounded-3xl">
+                    <div className={`h-16 w-16 rounded-full flex items-center justify-center font-display font-bold text-xl skeuo-raised ${
                       scoreVal >= 80 
-                        ? 'border-emerald-500 text-emerald-600 bg-emerald-50/20' 
+                        ? 'text-emerald-600' 
                         : scoreVal >= 60 
-                        ? 'border-amber-500 text-amber-600 bg-amber-50/20' 
-                        : 'border-rose-500 text-rose-500 bg-rose-50/20'
+                        ? 'text-amber-600' 
+                        : 'text-rose-600'
                     }`}>
                       {scoreVal}%
                     </div>
                     <div>
-                      <p className="text-xs font-bold text-slate-700">Talent Alignment</p>
-                      <p className="text-[10px] text-slate-400 mt-0.5">Weighted average across all NLP dimensions.</p>
+                      <p className="text-xs font-bold text-slate-900">Talent Alignment</p>
+                      <p className="text-[10px] text-slate-600 mt-1 font-bold">Weighted average across dimensions.</p>
                     </div>
                   </div>
 
                   {/* Sector Scores progress lists */}
-                  <div className="space-y-3 pt-4 border-t border-slate-100">
-                    <h5 className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Sector Scores</h5>
+                  <div className="space-y-4 pt-2">
+                    <h5 className="text-[10px] font-bold text-slate-500 uppercase tracking-wider pl-2">Sector Scores</h5>
                     
-                    <div className="space-y-2">
+                    <div className="space-y-3">
                       {/* Keywords Match */}
                       <div>
-                        <div className="flex justify-between text-[10px] text-slate-500 font-semibold mb-1">
+                        <div className="flex justify-between text-[10px] text-slate-700 font-bold mb-1.5 pl-2">
                           <span>Keywords Match</span>
                           <span>{Math.round(result.keyword_score || 0)}%</span>
                         </div>
-                        <div className="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
+                        <div className="h-2 w-full skeuo-pressed rounded-full overflow-hidden p-0.5">
                           <div 
-                            className="h-full bg-purple-500 transition-all duration-300" 
+                            className="h-full bg-indigo-500 rounded-full transition-all duration-300" 
                             style={{ width: `${result.keyword_score || 0}%` }}
                           />
                         </div>
@@ -184,13 +188,13 @@ export const MultiJDComparison: React.FC = () => {
 
                       {/* Semantic Similarity */}
                       <div>
-                        <div className="flex justify-between text-[10px] text-slate-500 font-semibold mb-1">
+                        <div className="flex justify-between text-[10px] text-slate-700 font-bold mb-1.5 pl-2">
                           <span>Semantic Fit</span>
                           <span>{Math.round(result.semantic_score || 0)}%</span>
                         </div>
-                        <div className="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
+                        <div className="h-2 w-full skeuo-pressed rounded-full overflow-hidden p-0.5">
                           <div 
-                            className="h-full bg-emerald-500 transition-all duration-300" 
+                            className="h-full bg-emerald-500 rounded-full transition-all duration-300" 
                             style={{ width: `${result.semantic_score || 0}%` }}
                           />
                         </div>
@@ -198,13 +202,13 @@ export const MultiJDComparison: React.FC = () => {
 
                       {/* Bullet Quality */}
                       <div>
-                        <div className="flex justify-between text-[10px] text-slate-500 font-semibold mb-1">
+                        <div className="flex justify-between text-[10px] text-slate-700 font-bold mb-1.5 pl-2">
                           <span>Bullet Quality</span>
                           <span>{Math.round(result.bullet_quality_score || 0)}%</span>
                         </div>
-                        <div className="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
+                        <div className="h-2 w-full skeuo-pressed rounded-full overflow-hidden p-0.5">
                           <div 
-                            className="h-full bg-amber-500 transition-all duration-300" 
+                            className="h-full bg-amber-500 rounded-full transition-all duration-300" 
                             style={{ width: `${result.bullet_quality_score || 0}%` }}
                           />
                         </div>
@@ -213,12 +217,12 @@ export const MultiJDComparison: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-[10px] font-bold text-slate-400">
-                  <span className="flex items-center gap-1">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />
+                <div className="mt-8 pt-5 border-t border-[#4a3424]/50 flex items-center justify-between text-[10px] font-bold text-slate-500">
+                  <span className="flex items-center gap-1.5">
+                    <CheckCircle2 className="h-4 w-4 text-emerald-500" />
                     Audited
                   </span>
-                  <span className="flex items-center gap-0.5 text-indigo-600 hover:text-indigo-755 hover:underline cursor-pointer">
+                  <span className="flex items-center gap-1 text-indigo-600 hover:text-indigo-700 cursor-pointer skeuo-pressed px-3 py-1.5 rounded-full group-hover:skeuo-raised transition-all">
                     View full report
                     <ChevronRight className="h-3 w-3" />
                   </span>
