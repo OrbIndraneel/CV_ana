@@ -66,5 +66,6 @@ class JobDescription(Base):
     analyses: Mapped[List["Analysis"]] = relationship(
         "Analysis",
         back_populates="job_description",
-        cascade="all, delete-orphan"
+        cascade="all, delete-orphan",
+        passive_deletes=True
     )

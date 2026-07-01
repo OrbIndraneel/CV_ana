@@ -181,12 +181,13 @@ function App() {
                             <button
                               type="button"
                               onClick={(e) => {
+                                alert("Trash button clicked! ID: " + resume.id);
                                 e.stopPropagation();
                                 e.preventDefault();
-                                dispatch(deleteResume(resume.id));
+                                dispatch(deleteResume(resume.id)).unwrap().catch(err => alert("Error deleting: " + err));
                               }}
                               title="Delete Resume"
-                              className="h-10 w-10 flex items-center justify-center rounded-full text-slate-500 hover:text-rose-600 skeuo-raised active:skeuo-pressed transition-all cursor-pointer"
+                              className="h-10 w-10 flex items-center justify-center rounded-full bg-rose-500 text-white hover:bg-rose-600 transition-all cursor-pointer relative z-50"
                             >
                               <Trash2 className="h-4.5 w-4.5 pointer-events-none" />
                             </button>
@@ -233,9 +234,9 @@ function App() {
                               onClick={(e) => {
                                 e.stopPropagation();
                                 e.preventDefault();
-                                dispatch(deleteJobDescription(jd.id));
+                                dispatch(deleteJobDescription(jd.id)).unwrap().catch(err => alert("Error deleting: " + err));
                               }}
-                              className="p-2 rounded-full text-slate-500 hover:text-rose-600 skeuo-raised active:skeuo-pressed transition-all cursor-pointer shrink-0"
+                              className="p-2 rounded-full text-slate-500 hover:text-rose-600 skeuo-raised active:skeuo-pressed transition-all cursor-pointer shrink-0 relative z-50"
                             >
                               <Trash2 className="h-4 w-4 pointer-events-none" />
                             </button>
@@ -479,9 +480,9 @@ function App() {
                       onClick={(e) => {
                         e.stopPropagation();
                         e.preventDefault();
-                        dispatch(deleteJobDescription(jd.id));
+                        dispatch(deleteJobDescription(jd.id)).unwrap().catch(err => alert("Error deleting: " + err));
                       }}
-                      className="h-10 w-10 rounded-full text-slate-500 hover:text-rose-600 transition-all cursor-pointer flex items-center justify-center skeuo-raised active:skeuo-pressed shrink-0"
+                      className="h-10 w-10 rounded-full text-slate-500 hover:text-rose-600 transition-all cursor-pointer flex items-center justify-center skeuo-raised active:skeuo-pressed shrink-0 relative z-50"
                     >
                       <Trash2 className="h-4 w-4 pointer-events-none" />
                     </button>

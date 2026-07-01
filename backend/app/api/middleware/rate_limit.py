@@ -56,20 +56,29 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
         # Unique Redis key per client IP + request path combination
         key = f"rate_limit:{client_ip}:{request.url.path}"
 
+        # Determine limits based on route
+        limit = self.limit
+        window = self.window
+        
+        # Stricter rate limit for login page (5 attempts per 5 minutes)
+        if request.url.path.endswith("/auth/login"):
+            limit = 5
+            window = 300
+
         try:
             current_time = time.time()
             
             # Use Redis pipeline to run commands atomically
             pipe = self.redis.pipeline()
             # 1. Remove request timestamps older than the sliding window boundary
-            pipe.zremrangebyscore(key, 0, current_time - self.window)
+            pipe.zremrangebyscore(key, 0, current_time - window)
             # 2. Count remaining items in the sorted set
             pipe.zcard(key)
             # Execute pipeline
             _, req_count = pipe.execute()
 
-            if req_count >= self.limit:
-                logger.warning(f"Rate limit exceeded: {client_ip} requesting {request.url.path}.")
+            if req_count >= limit:
+                logger.warning(f"Rate limit exceeded: {client_ip} requesting {request.url.path}. Limit: {limit}")
                 return JSONResponse(
                     status_code=status.HTTP_429_TOO_MANY_REQUESTS,
                     content={
@@ -81,7 +90,7 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
             # Record this request with current timestamp
             pipe = self.redis.pipeline()
             pipe.zadd(key, {str(current_time): current_time})
-            pipe.expire(key, self.window)
+            pipe.expire(key, window)
             pipe.execute()
 
         except Exception as e:

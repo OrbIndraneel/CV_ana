@@ -77,5 +77,6 @@ class Resume(Base):
     analyses: Mapped[List["Analysis"]] = relationship(
         "Analysis",
         back_populates="resume",
-        cascade="all, delete-orphan"
+        cascade="all, delete-orphan",
+        passive_deletes=True
     )
